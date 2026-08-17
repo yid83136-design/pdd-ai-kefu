@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>AI 客服设置</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 350px;
+      padding: 18px 16px 14px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .header .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(34,197,94,0.5);
+    }
+    .header h2 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .header .ver {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-left: auto;
+    }
+
+    .section { margin-bottom: 14px; }
+    .section label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #475569;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      color: #1e293b;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, textarea:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.12);
+    }
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    textarea {
+      height: 90px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    button {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    button:active { opacity: 0.85; }
+
+    .btn-primary {
+      background: #22c55e;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #16a34a; }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .btn-secondary:hover { background: #cbd5e1; }
+
+    .btn-test {
+      background: #3b82f6;
+      color: #fff;
+    }
+    .btn-test:hover { background: #2563eb; }
+
+    #statusArea {
+      margin-top: 12px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.5;
+      display: none;
+    }
+    #statusArea.show { display: block; }
+    #statusArea.ok     { background: #dcfce7; color: #166534; }
+    #statusArea.err    { background: #fef2f2; color: #991b1b; }
+    #statusArea.info   { background: #dbeafe; color: #1e40af; }
+    #statusArea.warn   { background: #fef3c7; color: #92400e; }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 14px 0 10px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="dot"></div>
+    <h2>拼多多 AI 客服</h2>
+    <span class="ver">v1.0</span>
+  </div>
+
+  <div class="section">
+    <label for="apiKey">DeepSeek API Key</label>
+    <input type="password" id="apiKey"
+      placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+  </div>
+
+  <div class="section">
+    <label for="serverUrl">服务器地址</label>
+    <input type="text" id="serverUrl"
+      value="http://34.81.122.137:5000"
+      placeholder="http://你的服务器IP:5000">
+  </div>
+
+  <div class="section">
+    <label for="prompt">店铺提示词（告诉 AI 你的店铺信息）</label>
+    <textarea id="prompt" placeholder="例如：&#10;本店主营女装,尺码偏小建议买大一码&#10;发货时间：48小时内&#10;默认快递：圆通/中通"></textarea>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" id="saveBtn">保存配置</button>
+    <button class="btn-test" id="testBtn">测试连接</button>
+  </div>
+
+  <div id="statusArea"></div>
+
+  <hr>
+
+  <div class="footer">
+    打开拼多多客服网页后自动监听<br>
+    绿点 = 正常 | 蓝点 = 思考中 | 红点 = 断连<br>
+    点击页面右上角圆点可切换 自动/手动 模式
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

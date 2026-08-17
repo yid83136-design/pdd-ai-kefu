@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "拼多多 AI 客服助手",
+  "version": "1.0",
+  "description": "自动监听拼多多客服消息，通过 DeepSeek AI 智能回复",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "*://mms.pinduoduo.com/*",
+    "*://34.81.122.137/*",
+    "*://localhost/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://mms.pinduoduo.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AI 客服设置"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

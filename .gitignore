@@ -1,0 +1,19 @@
+# 备份压缩包
+*.zip
+
+# 旧版本备份目录
+原0/
+原1/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# 运行时数据
+*.log
+
+# 开发过程文档（本地保留，不上传）
+给Claude的*.txt
